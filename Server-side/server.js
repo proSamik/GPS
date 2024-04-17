@@ -25,7 +25,7 @@ const parkingSpaces = {
 };
 
 mqttClient.on('connect', () => {
-    console.log("Connected to MQTT broker");
+    console.log('Connected to MQTT broker');
     mqttClient.subscribe(['parking/space/001', 'parking/space/002']);
 });
 
@@ -35,37 +35,35 @@ mqttClient.on('message', (topic, message) => {
 
     console.log(`Received message: ${status} on topic: ${topic}`);
     
-    if (status === 'occupied' && space.status === 'vacant') {
-        // Start the timer
-        space.timerStart = Date.now();
-        space.status = 'occupied';
-    } else if (status === 'vacant' && space.status === 'occupied') {
-        // Stop the timer and calculate fee
-        const duration = Date.now() - space.timerStart;
-        const hours = duration / (1000 * 10); // 10 seconds as 1 hour
-        space.fee = Math.ceil(hours) * 10; // ₹10 per hour
-        space.timerStart = null;
-        space.status = 'vacant';
+    // Check for a status change before updating
+    if (status !== space.status) { // Only update if status actually changes
+        if (status === 'occupied' && space.status === 'vacant') {
+            space.timerStart = Date.now();
+            space.status = 'occupied';
+            space.fee = 0; // Reset fee on new occupancy
+        } else if (status === 'vacant' && space.status === 'occupied') {
+            const duration = Date.now() - space.timerStart;
+            const hours = duration / (1000 * 10); // 10 seconds as 1 hour
+            space.fee = Math.ceil(hours) * 10; // Calculate fee
+            space.status = 'vacant';
+            space.timerStart = null; // Clear timer start
+        }
+        // Emit the update only if there was a status change
+        io.emit('parking update', { topic, status: space.status, fee: space.fee, timerStart: space.timerStart });
     }
-
-    // Notify all connected clients of the update
-    io.emit('parking update', { topic, status: space.status, fee: space.fee });
 });
 
-app.get('/', (req, res) => {
-    res.send('Parking System Server is running');
-});
-
-// Setup WebSocket connection
 io.on('connection', (socket) => {
     console.log('A client connected');
     socket.emit('initial data', parkingSpaces);
-    
     socket.on('disconnect', () => {
         console.log('A client disconnected');
     });
 });
 
+app.get('/', (req, res) => {
+    res.send('Parking System Server is up and running');
+});
 
 const PORT = 3000;
 server.listen(PORT, () => {
