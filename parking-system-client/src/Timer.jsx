@@ -11,4 +11,5 @@ function Timer({ start }) {
     
         return <p>Time Parked: {(timeElapsed / 1000).toFixed(0)} seconds</p>;
     }
-    
+
+export default Timer;
