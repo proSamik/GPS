@@ -5,8 +5,16 @@ const http = require('http');
 const socketIo = require('socket.io');
 const mqtt = require('mqtt');
 const moment = require('moment');
+const QRCode = require('qrcode');
+const cors = require('cors');
+
+
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());  
+
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
@@ -15,8 +23,37 @@ const io = socketIo(server, {
     }
 });
 
+let bookings = [];
+
+// Endpoint to handle bookings and generate QR codes
+app.post('/book', async (req, res) => {
+    const { userId, parkingSpaceId, date, time } = req.body;
+    const bookingId = `${userId}-${Date.now()}`;  // Simple unique ID for demonstration
+    const bookingDetails = {
+        userId,
+        parkingSpaceId,
+        date,
+        time,
+        bookingId
+    };
+
+    // Save booking
+    bookings.push(bookingDetails);
+
+    try {
+        // Encode booking details as a JSON string in the QR code
+        const qrData = JSON.stringify({ bookingId, parkingSpaceId, userId, date, time });
+        const qrCode = await QRCode.toDataURL(qrData);
+        res.json({ qrCode, bookingId, message: 'Booking successful!' });
+    } catch (error) {
+        console.error('Error generating QR code:', error);
+        res.status(500).send('Failed to generate QR code');
+    }
+});
+
 // Connect to MQTT broker
 const mqttClient = mqtt.connect('mqtt://91.121.93.94'); // Use your MQTT broker IP
+
 
 
 const parkingSpaces = {
