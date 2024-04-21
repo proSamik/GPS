@@ -48,33 +48,40 @@ function BookingComponent() {
     };
 
     return (
-        <div>
-            <h1>Book a Parking Space</h1>
+        <div className="bg-white p-6 rounded-lg">
+            <h2 className="text-2xl font-semibold mb-4">Book Parking Space</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                    User ID:
-                    <input type="text" name="userId" value={bookingDetails.userId} onChange={handleChange} required />
-                </label>
-                <br />
-                <label>
-                    Parking Space ID:
-                    <input type="text" name="parkingSpaceId" value={bookingDetails.parkingSpaceId} onChange={handleChange} required />
-                </label>
-                <br />
-                <label>
-                    Date:
-                    <input type="date" name="date" value={bookingDetails.date} onChange={handleChange} required />
-                </label>
-                <br />
-                <label>
-                    Time:
-                    <input type="time" name="time" value={bookingDetails.time} onChange={handleChange} required />
-                </label>
-                <br />
-                <button type="submit">Book Now</button>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">User ID</label>
+                    <input type="text" name="userId" value={bookingDetails.userId}
+                           onChange={handleChange} required
+                           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"/>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Parking Space ID</label>
+                    <input type="text" name="parkingSpaceId" value={bookingDetails.parkingSpaceId}
+                           onChange={handleChange} required
+                           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"/>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Date</label>
+                    <input type="date" name="date" value={bookingDetails.date}
+                           onChange={handleChange} required
+                           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"/>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Time</label>
+                    <input type="time" name="time" value={bookingDetails.time}
+                           onChange={handleChange} required
+                           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"/>
+                </div>
+                <button type="submit"
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Book Now
+                </button>
             </form>
-            {message && <p>{message}</p>}
-            {qrCode && <div><img src={qrCode} alt="Booking QR Code" /></div>}
+            {message && <p className="text-center">{message}</p>}
+            {qrCode && <div className="text-center mt-4"><img src={qrCode} alt="Booking QR Code" className="mx-auto" /></div>}
         </div>
     );
 }
