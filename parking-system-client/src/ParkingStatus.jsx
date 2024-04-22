@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import Timer from './Timer';
+import './ParkingStatus.css'; 
 
 function ParkingStatus() {
     const [socket, setSocket] = useState(null);
@@ -61,17 +62,20 @@ function ParkingStatus() {
 
     return (
         <div>
-            <h1>Parking System Status</h1>
-            {Object.entries(parkingSpaces).map(([id, { status, fee, timerStart }]) => (
-                <div key={id}>
-                    <p>{id} - Status: {status}, Fee: ₹{fee}</p>
-                    {status === 'occupied' && timerStart &&
-                        <Timer start={timerStart} />
-                    }
-                </div>
-            ))}
+          <h1 className="title">Parking System Status</h1>
+          {Object.entries(parkingSpaces).map(([id, { status, fee, timerStart }]) => (
+            <div key={id} className="parking-card">
+              <h2 className="space-title">Parking Space - P{id.split('/').pop()}</h2>
+              <div className={`status-toggle ${status === 'occupied' ? 'occupied' : ''}`}>
+                {status.charAt(0).toUpperCase() + status.slice(1)}
+              </div>
+              <p className="fee-info">Fee: ₹{fee}</p>
+              {status === 'occupied' && timerStart && <div className="timer-styled"><Timer start={timerStart} /></div>}
+            </div>
+          ))}
         </div>
-    );
-}
+      );
+    }
+    
 
 export default ParkingStatus;
