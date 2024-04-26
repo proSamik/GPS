@@ -7,6 +7,8 @@ const mqtt = require('mqtt');
 const moment = require('moment');
 const QRCode = require('qrcode');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
 
 
 
@@ -14,6 +16,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());  
+app.use(bodyParser.json());
+
 
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -98,9 +102,12 @@ io.on('connection', (socket) => {
     });
 });
 
-app.get('/', (req, res) => {
-    res.send('Parking System Server is up and running');
-});
+app.post('/api/saveLocation', (req, res) => {
+    const { lat, lng } = req.body;
+    console.log('Received location:', { lat, lng });
+    // Perform further processing or store the location data as needed
+    res.json({ message: 'Location saved successfully' });
+  });
 
 const PORT = 3000;
 server.listen(PORT, () => {
