@@ -3,6 +3,8 @@ node_modules/
 
 # Environment variables
 .env
+parking-system-client/.env
+
 
 # Production build files
 build/
