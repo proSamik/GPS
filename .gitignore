@@ -1,5 +1,6 @@
 # Dependency directories
-node_modules/
+parking-system-client/node_modules/
+Server-side/node_modules/
 
 # Environment variables
 .env
@@ -7,7 +8,8 @@ parking-system-client/.env
 
 
 # Production build files
-build/
+parking-system-client/build/
+Server-side/build/
 
 # Log files
 *.log
