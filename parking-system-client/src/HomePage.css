@@ -1,0 +1,32 @@
+/* HomePage.css */
+.home-container {
+        width: 100%; /* Full width */
+        height: 100vh; /* Full height of the viewport */
+        background-color: white; /* White background */
+        display: flex;
+        flex-direction: column; /* Stack vertically */
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+      }
+      
+      .welcome-message {
+        text-align: center; /* Center the text */
+        color: #5046E5; /* A purple color to match the navbar theme */
+        margin-bottom: 20px; /* Space before the image */
+      }
+      
+      .welcome-message h1 {
+        font-size: 2.5rem; /* Large font size for the main heading */
+        font-weight: bold; /* Bold font for emphasis */
+      }
+      
+      .welcome-message p {
+        font-size: 1.2rem; /* Slightly larger paragraph font size */
+        margin-top: 10px; /* Space between heading and paragraph */
+      }
+      
+      .centered-image {
+        max-width: 100%; /* Ensure the image is not wider than the screen */
+        max-height: 60vh; /* Limit the height to maintain space for text */
+      }
+      

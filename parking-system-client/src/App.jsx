@@ -3,20 +3,30 @@ import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 're
 import ParkingStatus from './ParkingStatus';
 import MapComponent from './MapComponent';
 import BookingComponent from './BookingComponent';
+import Preloader from './Preloader';
+import HomePage from './HomePage';
 import './App.css'; 
 
 
 function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000); // Simulate loading time
+  }, []);
+
     return (
       <Router>
-        <div className="flex flex-col min-h-screen bg-gray-100">
+        {loading && <Preloader />} {/* Show preloader while loading */}
+      <div className={`flex flex-col min-h-screen bg-gray-100 ${loading ? 'hidden' : ''}`}>
           <Nav />
           <main className="flex-1">
             <Routes>
               <Route path="/booking" element={<BookingComponent />} />
               <Route path="/status" element={<ParkingStatus />} />
               <Route path="/map" element={<MapComponent />} />
-              <Route path="/" element={<WelcomeMessage />} />
+              <Route path="/" element={<HomePage />} />
             </Routes>
           </main>
         </div>
@@ -68,5 +78,3 @@ function App() {
   }
   
   export default App;
-  
-

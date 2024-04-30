@@ -12,7 +12,7 @@ function ParkingStatus() {
 
     // Establish the socket connection when the component mounts
     useEffect(() => {
-        const newSocket = io('http://localhost:3000');
+        const newSocket = io('http://192.168.134.7:3000');
         setSocket(newSocket);
         console.log('Socket initialized');
 

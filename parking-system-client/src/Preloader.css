@@ -1,0 +1,36 @@
+/* Styles for the preloader container */
+.preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffc0cce4; /* Set the background to white */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Ensure it is above all other content */
+      }
+      
+      /* Styles for the image inside the preloader */
+      .preloader img {
+        width: 35vw; /* Initial size of the SVG */
+        transition: transform 0.5s ease; /* Transition for the zoom effect */
+        transform-origin: center; /* Ensure the zoom centers correctly */
+      }
+      
+      /* Animation effect when the component is mounted */
+      @keyframes zoom {
+        0%, 100% {
+          transform: scale(1); /* Normal size */
+        }
+        50% {
+          transform: scale(1.5); /* Zoom to 150% */
+        }
+      }
+      
+      /* Apply the animation to the image */
+      .preloader img {
+        animation: zoom 2s infinite; /* Apply the zoom animation continuously */
+      }
+      

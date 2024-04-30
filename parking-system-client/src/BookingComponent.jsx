@@ -23,7 +23,7 @@ function BookingComponent() {
         event.preventDefault();  // Prevent the form from refreshing the page
         console.log('Submitting booking details:', bookingDetails);
         try {
-            const response = await fetch('http://localhost:3000/book', {
+            const response = await fetch('http://192.168.134.7:3000/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
