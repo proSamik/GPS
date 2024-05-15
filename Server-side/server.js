@@ -8,6 +8,7 @@ const moment = require('moment');
 const QRCode = require('qrcode');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const router = express.Router();
 
 
 
@@ -48,7 +49,7 @@ app.post('/book', async (req, res) => {
         // Encode booking details as a JSON string in the QR code
         const qrData = JSON.stringify({ bookingId, parkingSpaceId, userId, date, time });
         const qrCode = await QRCode.toDataURL(qrData);
-        res.json({ qrCode, bookingId, message: 'Booking successful!' });
+        res.json({ qrCode, bookingId, message: 'Booking successful' });
     } catch (error) {
         console.error('Error generating QR code:', error);
         res.status(500).send('Failed to generate QR code');

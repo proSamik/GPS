@@ -1,0 +1,80 @@
+.qr-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #f7f7f7; /* Light grey background for better contrast */
+    color: #333; /* Dark text for readability */
+}
+
+.title-box {
+    background-color: #F7F7F7;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.booking-details-box {
+    background-color: #F7F7F7;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.qr-image {
+    margin-bottom: 20px;
+    height: 35%;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.directions-text {
+    margin-bottom: 20px;
+}
+
+.link-text {
+    color: #007BFF; /* Link color */
+    cursor: pointer; /* Makes it clear the text is clickable */
+}
+
+.link-text:hover {
+    text-decoration: underline; /* Adds underline on hover to indicate it's a link */
+}
+
+.home-button {
+    background-color: #5046E5; /* Theme color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #4035D8; /* Slightly darker on hover */
+}
+
+.details-text {
+    margin: 5px 0;
+    display: flex; /* Use flex to align items in a row */
+    align-items: center; /* Center items vertically */
+}
+
+.success-icon {
+    color: #28a745;
+    margin-left: 5px; /* Add a little space between the text and icon */
+}

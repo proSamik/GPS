@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import Timer from './Timer';
 import './ParkingStatus.css'; 
+import SessionDetails from './SessionDetails';
 
 function ParkingStatus() {
     const [socket, setSocket] = useState(null);
@@ -10,9 +11,13 @@ function ParkingStatus() {
         'parking/space/002': { status: 'Loading...', fee: 0, timerStart: null }
     });
 
+    const [selectedSpaceId, setSelectedSpaceId] = useState(null); // State for tracking selected parking space ID
+    const [paid, setPaid] = useState(false); // State for tracking payment status
+
+
     // Establish the socket connection when the component mounts
     useEffect(() => {
-        const newSocket = io('http://192.168.134.7:3000');
+        const newSocket = io('http://localhost:3000');
         setSocket(newSocket);
         console.log('Socket initialized');
 
@@ -60,21 +65,32 @@ function ParkingStatus() {
         }
     }, [socket]);
 
+    const handleSelectSpace = id => {
+        setSelectedSpaceId(id); // Set the selected parking space ID
+        setPaid(false);  // Reset the paid state when a new space is selected
+    };
+
+
     return (
         <div>
-          <h1 className="title">Parking System Status</h1>
-          {Object.entries(parkingSpaces).map(([id, { status, fee, timerStart }]) => (
-            <div key={id} className="parking-card">
-              <h2 className="space-title">Parking Space - P{id.split('/').pop()}</h2>
-              <div className={`status-toggle ${status === 'occupied' ? 'occupied' : ''}`}>
-                {status.charAt(0).toUpperCase() + status.slice(1)}
-              </div>
-              <p className="fee-info">Fee: ₹{fee}</p>
-              {status === 'occupied' && timerStart && <div className="timer-styled"><Timer start={timerStart} /></div>}
-            </div>
-          ))}
+            <h1 className="title">Parking System Status</h1>
+            {Object.entries(parkingSpaces).map(([id, { status, fee, timerStart }]) => (
+                <div key={id} className="parking-card" onClick={() => handleSelectSpace(id)}>
+                    <h2 className="space-title">Parking Space - P{id.split('/').pop()}</h2>
+                    <div className={`status-toggle ${status === 'occupied' ? 'occupied' : 'vacant'}`}>
+                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                    </div>
+                    <p className="fee-info">Fee: ₹{fee}</p>
+                    {status === 'occupied' && timerStart && <div className="timer-styled"> <Timer start={timerStart} /> </div>}
+                </div>
+            ))}
+            {selectedSpaceId && (
+                <SessionDetails parkingSpaceId={selectedSpaceId.split('/').pop()} fee={parkingSpaces[selectedSpaceId].fee} />
+            )}
         </div>
-      );
+    );
+
+
     }
     
 

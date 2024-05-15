@@ -1,0 +1,45 @@
+/* PaymentComponent.css */
+.payment-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000; /* High z-index to be on top */
+    }
+    
+    .payment-box {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 90%;
+        max-width: 400px; /* Limits the width of the box */
+        text-align: center;
+    }
+    
+    .payment-button {
+        background-color: #5046E5; /* Theme color */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    
+    .payment-button:hover {
+        background-color: #4035D8; /* Slightly darker on hover */
+    }
+    
+    .payment-text {
+        color: #333; /* Darker text for visibility */
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    

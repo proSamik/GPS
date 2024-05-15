@@ -6,6 +6,8 @@ import BookingComponent from './BookingComponent';
 import Preloader from './Preloader';
 import HomePage from './HomePage';
 import './App.css'; 
+import QRDisplay from './QRDisplay';
+import EntryQRDisplay from './EntryQRDisplay';
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Nav />
           <main className="flex-1">
             <Routes>
+          <Route path="/entry-qr" element={<EntryQRDisplay />} />
+          <Route path="/qrdisplay" element={<QRDisplay />} />
               <Route path="/booking" element={<BookingComponent />} />
               <Route path="/status" element={<ParkingStatus />} />
               <Route path="/map" element={<MapComponent />} />
