@@ -12,6 +12,7 @@ const HomePage: React.FC = () => {
       <Text style={styles.title}>Welcome to the Global Parking System</Text>
       <Button title="Go to Map" onPress={() => navigation.navigate('Map')} />
       <Button title="Go to Status" onPress={() => navigation.navigate('Status')} />
+      <Button title="Go to Booking" onPress={() => navigation.navigate('Booking')} />
     </View>
   );
 };
