@@ -10,15 +10,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const router = express.Router();
 
-
-
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());  
 app.use(bodyParser.json());
-
 
 const server = http.createServer(app);
 const io = socketIo(server, {
