@@ -5,7 +5,7 @@ Server-side/node_modules/
 # Environment variables
 .env
 parking-system-client/.env
-
+.vscode/
 
 # Production build files
 parking-system-client/build/
